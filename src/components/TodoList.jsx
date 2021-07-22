@@ -6,7 +6,7 @@ const TodoList = (props) =>{
     <>
     {props.todos.map((todo,index) =>{
           return (
-            <List><Todo text={todo.text} comp={todo.complete} key={index.toString()}/></List>
+            <List><Todo text={todo.text} key={index.toString()} classIndex={index}/></List>
           )
      })}
     </>

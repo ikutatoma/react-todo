@@ -1,23 +1,29 @@
 import Checkbox from '@material-ui/core/Checkbox';
-import {useState} from 'react'
-
+import {useContext , useEffect} from 'react';
+import {checkJudge } from '../App'
 
 const Todo = (props) => {
+  const { checked, setCheck } = useContext(checkJudge);
+
 
   const handleChange = () => {
-    return ""
+     return setCheck(true)
   }
-  
+
+
+  useEffect(() => {
+    console.log("aaaaaa")
+  },[props.classIndex]);
+
   return (
-    <>
+    <div className={ "check-box-" + props.classIndex}>
      <Checkbox
-        checked={props.comp}
-        onChange={handleChange}
+        checked={checked}
+        onClick={handleChange}
         inputProps={{ 'aria-label': 'primary checkbox' }}
      />
      {props.text}
-
-    </>
+    </div>
   )
 }
 

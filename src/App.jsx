@@ -1,41 +1,29 @@
-import React,{useState} from 'react'
-import Button from '@material-ui/core/Button';
-import { TodoList } from './components/index';
+import React, {useState} from 'react'
+import Form from './components/Form'
+import TodoItem from './components/TodoItem'
 
-export const checkJudge = React.createContext();
+const INITIAL_TASK = {
+    title: 'Reactのお勉強',
+    doing: false,
+}
+export const UserTask = React.createContext()
 
-const App = () =>{
+const App = () => {
+    const [tasks, setTasks] = useState([INITIAL_TASK])
+    
+    const value ={
+      tasks,
+      setTasks
+    }
 
-  const [todos,setTodos] = useState([]);//Todoの追加
-  const [checked, setCheck] = useState(false);//checkJudge
-
-  const addTodos = (todo) =>{//todosに全てのTodoが格納されているよ！
-    setTodos(prevTodo =>{
-      return [...prevTodo,todo]
-    })
-  }
-
-  const value ={
-    checked,
-    setCheck,
-  }
-  
-  return (
-    <>
-      <h1>Todoリスト</h1>     
-        <Button onClick={
-          () => {
-            addTodos({
-              text:"Buttonを押したから増えたよ",
-              complete:checked
-            })}
-          }>Click me
-        </Button> 
-      <checkJudge.Provider value={value}>
-          <TodoList todos={todos}/> 
-      </checkJudge.Provider>
-    </>
-  );
+    return (
+        <React.Fragment>
+          <UserTask.Provider value={value}>
+            <Form  />
+            <TodoItem/>          
+          </UserTask.Provider>
+        </React.Fragment>
+    )
 }
 
-export default App 
+export default App
